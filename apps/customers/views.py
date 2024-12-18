@@ -20,7 +20,7 @@ class CustomAuthTokenView(APIView):
         if unexpected_fields:
             return Response(f"Неожиданные поля: {', '.join(unexpected_fields)}", status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = CustomAuthTokenSerializer(data=request.data)
+        serializer = CustomAuthTokenSerializer(data=request.data, context={'request': request})
 
         if serializer.is_valid():
             user = serializer.validated_data

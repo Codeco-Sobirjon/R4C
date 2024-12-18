@@ -12,7 +12,9 @@ class CustomAuthTokenSerializer(serializers.Serializer):
 
     def validate(self, data):
         user = authenticate(username=data['username'], password=data['password'])
-        if user and user.is_active:
-            return user
-        raise serializers.ValidationError("Недействительные учетные данные")
+
+        if not user:
+            raise serializers.ValidationError("Недействительные учетные данные")
+
+        return user
 
