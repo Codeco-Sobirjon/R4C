@@ -2,7 +2,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import Robot, Order
+from apps.orders.models import Order
+from apps.robots.models import Robot
 
 
 @receiver(post_save, sender=Robot)
